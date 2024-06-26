@@ -29,42 +29,45 @@
                         <span id="inconclusive-count" class="badge badge-secondary">Inconclusive: xxx</span>
                         <span id="skipped-count" class="badge badge-secondary">Skipped: xxx</span>
                         <span id="date" class="badge badge-light">Date: 2023-04-22 15:09:52Z</span>
-                        <span id="duration" class="badge badge-light">Duration: x.xxxx</span>
+                        <span id="duration" class="badge badge-light">Duration: 1.23456</span>
                     </div>
                 </div>
                 <div id="test-cases"></div>
                 <template id="template-failed">
                     <div role="alert" class="alert alert-danger">
                         <h3 style="overflow-wrap: break-word;">Tests.FailingTest</h3>
-                        <span class="badge badge-danger">Failed</span>
-                        <span class="badge badge-light">Duration: x.xxxxxx</span>
+                        <div class="badges mb-2">
+                            <span class="badge badge-danger">Failed</span>
+                            <span class="badge badge-light">Duration: 0.001234</span>
+                        </div>
                         <h5>Message</h5>
                         <p>A failure</p>
                         <h5>Stack Trace</h5>
-                        <pre class="bg-white">
-        at Tests.FailingTest () [0x00001] in /Assets/Tests/Tests.cs:42
-        
-                        </pre>
+                        <pre class="bg-white"></pre>
+                        <h5>Output</h5>
+                        <pre class="bg-white"></pre>
                     </div>
                 </template>
                 <template id="template-skipped">
                     <div role="alert" class="alert alert-secondary">
                         <h3 style="overflow-wrap: break-word;">Tests.TestsSimplePasses</h3>
-                        <span class="badge badge-secondary">Skipped</span>
-                        <span class="badge badge-light">Duration: 0.001234</span>
-                        <h5>Message</h5>
-                        <p>Skipped</p>
+                        <div class="badges mb-2">
+                            <span class="badge badge-secondary">Skipped</span>
+                            <span class="badge badge-light">Duration: 0.001234</span>
+                        </div>
+                        <h5>Reason</h5>
+                        <p class="mb-0">Skipped</p>
                     </div>
                 </template>                
                 <template id="template-passed">
                     <div role="alert" class="alert alert-success">
                         <h3 style="overflow-wrap: break-word;">Tests.TestsSimplePasses</h3>
-                        <span class="badge badge-light">Passed</span>
-                        <span class="badge badge-light">Duration: 0.001234</span>
+                        <div class="badges mb-2">
+                            <span class="badge badge-light">Passed</span>
+                            <span class="badge badge-light">Duration: 0.001234</span>
+                        </div>
                         <h5>Output</h5>
-                        <pre class="bg-white">
-                            Output text
-                        </pre>
+                        <pre class="bg-white"></pre>
                     </div>
                 </template>
             </div>

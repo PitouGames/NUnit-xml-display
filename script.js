@@ -109,10 +109,25 @@ function ProcessFailedTests(failedTestCases) {
         const testCase = failedTestCases.childNodes[i];
         let testCaseHtml = template.content.cloneNode(true);
         const elements = testCaseHtml.children[0].children;
-        elements[0].textContent = testCase.attributes["name"].value;
-        elements[2].textContent = "Duration: " + testCase.attributes["duration"].value;
-        elements[4].textContent = testCase.getElementsByTagName("failure")[0].getElementsByTagName("message")[0].textContent;
-        elements[6].textContent = testCase.getElementsByTagName("failure")[0].getElementsByTagName("stack-trace")[0].textContent;
+        elements[0].textContent = testCase.attributes["fullname"].value;
+        elements[1].childNodes[3].textContent = "Duration: " + testCase.attributes["duration"].value;
+        elements[3].textContent = testCase.getElementsByTagName("failure")[0].getElementsByTagName("message")[0].textContent;
+
+        const output = testCase.getElementsByTagName("output")[0];
+        if (output !== undefined) {
+            elements[7].textContent = output.textContent;
+        } else {
+            testCaseHtml.children[0].removeChild(elements[7]);
+            testCaseHtml.children[0].removeChild(elements[6]);
+        }
+
+        const stackTrace = testCase.getElementsByTagName("failure")[0].getElementsByTagName("stack-trace")[0];
+        if (stackTrace !== undefined) {
+            elements[5].textContent = stackTrace.textContent;
+        } else {
+            testCaseHtml.children[0].removeChild(elements[5]);
+            testCaseHtml.children[0].removeChild(elements[4]);
+        }
         root.appendChild(testCaseHtml);
     }
 }
@@ -124,9 +139,15 @@ function ProcessSkippedTests(skippedTestCases) {
         const testCase = skippedTestCases.childNodes[i];
         let testCaseHtml = template.content.cloneNode(true);
         const elements = testCaseHtml.children[0].children;
-        elements[0].textContent = testCase.attributes["name"].value;
-        elements[2].textContent = "Duration: " + testCase.attributes["duration"].value;
-        elements[4].textContent = testCase.getElementsByTagName("reason")[0].getElementsByTagName("message")[0].textContent;
+        elements[0].textContent = testCase.attributes["fullname"].value;
+        elements[1].childNodes[3].textContent = "Duration: " + testCase.attributes["duration"].value;
+        const reason = testCase.getElementsByTagName("reason")[0].getElementsByTagName("message")[0];
+        if (reason !== undefined) {
+            elements[3].textContent = reason.textContent;
+        } else {
+            testCaseHtml.children[0].removeChild(elements[3]);
+            testCaseHtml.children[0].removeChild(elements[2]);
+        }
         root.appendChild(testCaseHtml);
     }
 }
@@ -138,15 +159,15 @@ function ProcessPassedTests(passsedTestCases) {
         const testCase = passsedTestCases.childNodes[i];
         let testCaseHtml = template.content.cloneNode(true);
         const elements = testCaseHtml.children[0].children;
-        elements[0].textContent = testCase.attributes["name"].value;
-        elements[2].textContent = "Duration: " + testCase.attributes["duration"].value;
+        elements[0].textContent = testCase.attributes["fullname"].value;
+        elements[1].childNodes[3].textContent = "Duration: " + testCase.attributes["duration"].value;
 
         const output = testCase.getElementsByTagName("output")[0];
         if (output !== undefined) {
-            elements[4].textContent = output.textContent;
+            elements[3].textContent = output.textContent;
         } else {
-            testCaseHtml.children[0].removeChild(elements[4]);
             testCaseHtml.children[0].removeChild(elements[3]);
+            testCaseHtml.children[0].removeChild(elements[2]);
         }
         root.appendChild(testCaseHtml);
     }
